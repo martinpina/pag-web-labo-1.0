@@ -98,3 +98,23 @@ La página puede publicarse mediante **GitHub Pages**.
 ---
 
 *Trabajo práctico académico — 2026*
+
+## Dataset
+
+Los archivos utilizados en el análisis se encuentran en la carpeta `data/`.
+
+- [Fact_User_Activity.csv](data/Fact_User_Activity.csv)
+- [Dim_Users.csv](data/Dim_Users.csv)
+- [Dim_MentalState.csv](data/Dim_MentalState.csv)
+- [Dim_Habits.csv](data/Dim_Habits.csv)
+- [Dim_Date.csv](data/Dim_Date.csv)
+
+## Visualizaciones
+
+Los gráficos generados durante el análisis se encuentran en `assets/`.
+
+![Distribución de horas de estudio](assets/grafico1_distribucion.png)
+
+![Sesiones de concentración](assets/grafico2_barras.png)
+
+![Relación entre videos vistos y horas de estudio](assets/grafico3_dispersion.png)
