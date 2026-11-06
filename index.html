@@ -1,82 +1,14 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Documentación metodológica del trabajo práctico sobre consumo de videos cortos y atención mental.">
-  <title>TP LABO | Análisis de datos</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<header class="topbar">
-  <a class="brand" href="#inicio"><span class="brand-mark">TP</span><span>LABO <small>ANÁLISIS DE DATOS</small></span></a>
-  <button class="menu-toggle" id="menuToggle" aria-label="Abrir navegación">☰</button>
-  <nav id="nav">
-    <a href="#proyecto">Proyecto</a><a href="#datos">Datos</a><a href="#metodo">Metodología</a>
-    <a href="#resultados">Resultados</a><a href="#alcances">Alcances</a>
-  </nav>
-</header>
-
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Trabajo práctico sobre consumo de videos cortos y atención mental."><title>TP LABO | Análisis de datos</title><link rel="stylesheet" href="styles.css"></head>
+<body><header class="topbar"><a class="brand" href="#inicio"><span class="brand-mark">TP</span><span>LABO <small>ANÁLISIS DE DATOS</small></span></a><button class="menu-toggle" id="menuToggle" aria-label="Abrir navegación" aria-expanded="false">☰</button><nav id="nav"><a href="#proyecto">Proyecto</a><a href="#datos">Datos</a><a href="#tablas">Tablas</a><a href="#metodo">Metodología</a><a href="#resultados">Resultados</a><a href="#alcances">Alcances</a></nav></header>
 <main>
-<section class="hero" id="inicio">
-  <div class="hero-content">
-    <p class="eyebrow">LABORATORIO DE MÉTODOS CUANTITATIVOS APLICADOS A LA GESTIÓN · 2026</p>
-    <h1>Consumo de videos cortos<br><span>y atención mental</span></h1>
-    <p class="lead">Un recorrido reproducible por los datos, las transformaciones y las asociaciones observadas entre consumo digital, estudio y concentración.</p>
-    <div class="hero-meta"><span>Esther Kikushima</span><span>Martín Pina</span><span>2.º cuatrimestre · 2026</span></div>
-    <a class="button" href="#proyecto">Explorar el trabajo <span>↓</span></a>
-  </div>
-  <div class="hero-visual" aria-hidden="true">
-    <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="core"></div>
-    <span class="node n1"></span><span class="node n2"></span><span class="node n3"></span>
-    <span class="visual-label label-a">DATOS</span><span class="visual-label label-b">PATRONES</span><span class="visual-label label-c">EVIDENCIA</span>
-  </div>
-</section>
-
-<section class="intro section" id="proyecto">
-  <div class="section-kicker">01 / PLANTEAMIENTO</div>
-  <div class="intro-grid">
-    <h2>De una inquietud<br> a una pregunta <em>analizable.</em></h2>
-    <div>
-      <p class="large">El trabajo explora cómo se relaciona la intensidad de consumo de videos cortos con indicadores vinculados al estudio y la concentración.</p>
-      <p>La pregunta se aborda desde un enfoque descriptivo: buscamos identificar regularidades en los registros disponibles, comparar grupos y observar distribuciones, sin atribuir relaciones causales.</p>
-      <div class="question-card"><span>Pregunta orientadora</span><p>¿Qué patrones descriptivos aparecen entre el consumo de videos cortos, las horas de estudio y las sesiones de concentración?</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="section dark" id="datos">
-  <div class="section-kicker">02 / FUENTE Y EXPLORACIÓN</div>
-  <div class="section-heading"><h2>Conocer los datos<br>antes de analizarlos.</h2><p>La exploración inicial permitió reconocer la estructura de las tablas, sus variables y aspectos básicos de calidad.</p></div>
-  <div class="stats-grid">
-    <article class="stat"><strong>5.000</strong><span>registros de actividad</span></article>
-    <article class="stat"><strong>5</strong><span>tablas del modelo de datos</span></article>
-    <article class="stat"><strong>14</strong><span>variables en Fact_User_Activity</span></article>
-    <article class="stat"><strong>0</strong><span>duplicados en la tabla de actividad</span></article>
-  </div>
-  <div class="data-model">
-    <div class="fact-table"><span class="tag">TABLA DE HECHOS</span><h3>Fact_User_Activity</h3><p>Registros de actividad y medidas: horas de estudio, reels vistos, sesiones de concentración y otros indicadores.</p><span class="key">StateKey · HabitKey · UserKey · DateKey</span></div>
-    <div class="connector"><span>claves</span><i></i></div>
-    <div class="dimensions">
-      <div><b>Dim_MentalState</b><small>Estado mental / Brainrot Stage</small></div>
-      <div><b>Dim_Users</b><small>Características de usuarios</small></div>
-      <div><b>Dim_Habits</b><small>Hábitos</small></div>
-      <div><b>Dim_Date</b><small>Calendario</small></div>
-    </div>
-  </div>
-  <div class="quality-note"><span class="dot"></span><div><b>Control de calidad registrado</b><p>En la exploración de las cinco tablas no se detectaron filas duplicadas. Se identificó un valor nulo en <code>Dim_Habits.Coffee_Level</code>, que no interviene en el análisis principal.</p></div></div>
-  <p class="footnote">La dimensión calendario contiene fechas de 2026; esto no implica que todos esos días tengan actividad observada. La cobertura efectiva se determina con las fechas de Fact_User_Activity.</p>
-</section>
-
-<section class="section" id="metodo">
-  <div class="section-kicker">03 / PROCEDIMIENTO</div>
-  <div class="section-heading"><h2>Un flujo de trabajo<br>en tres operaciones.</h2><p>La secuencia transforma tablas relacionadas en una estructura que permite comparar grupos y estudiar patrones.</p></div>
-  <div class="steps">
-    <article class="step"><span class="step-number">01</span><div class="step-code">pd.merge()</div><h3>Integración</h3><p>Se une la tabla de actividad con la dimensión de estado mental mediante <code>StateKey</code>, incorporando la categoría <code>Brainrot_Stage</code> a cada registro.</p><div class="step-foot">Hechos + dimensión mental → df_completo</div></article>
-    <article class="step"><span class="step-number">02</span><div class="step-code">pd.qcut()</div><h3>Categorización</h3><p>La variable <code>Total_Reels_Watched</code> se divide en tres grupos por cuantiles: Bajo, Medio y Alto. Esto facilita comparar niveles de consumo.</p><div class="step-foot">Variable numérica → categoría ordinal</div></article>
-    <article class="step"><span class="step-number">03</span><div class="step-code">groupby() · mean()</div><h3>Resumen</h3><p>Se agrupa por nivel de consumo y se calculan los promedios de <code>Study_Hours</code> y <code>Focus_Sessions_Count</code>.</p><div class="step-foot">Grupos → estadísticas descriptivas</div></article>
-  </div>
-  <div class="code-panel"><div class="code-header"><span>Fragmento del procedimiento</span><span>PYTHON / PANDAS</span></div><pre><code>df_completo = pd.merge(
+<section class="hero" id="inicio"><div class="hero-content"><p class="eyebrow">LABORATORIO DE MÉTODOS CUANTITATIVOS APLICADOS A LA GESTIÓN · 2026</p><h1>Consumo de videos cortos<br><span>y atención mental</span></h1><p class="lead">Un recorrido reproducible por los datos, las transformaciones y las asociaciones observadas entre consumo digital, estudio y concentración.</p><div class="hero-meta"><span>Esther Kikushima</span><span>Martín Pina</span><span>2.º cuatrimestre · 2026</span></div><a class="button" href="#proyecto">Explorar el trabajo <span>↓</span></a></div><div class="hero-visual" aria-hidden="true"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="core"></div><span class="node n1"></span><span class="node n2"></span><span class="node n3"></span><span class="visual-label label-a">DATOS</span><span class="visual-label label-b">PATRONES</span><span class="visual-label label-c">EVIDENCIA</span></div></section>
+<section class="intro section" id="proyecto"><div class="section-kicker">01 / PLANTEAMIENTO</div><div class="intro-grid"><h2>De una inquietud<br> a una pregunta <em>analizable.</em></h2><div><p class="large">El trabajo explora cómo se relaciona la intensidad de consumo de videos cortos con indicadores vinculados al estudio y la concentración.</p><p>La pregunta se aborda desde un enfoque descriptivo: buscamos identificar regularidades en los registros disponibles, comparar grupos y observar distribuciones, sin atribuir relaciones causales.</p><div class="question-card"><span>Pregunta orientadora</span><p>¿Qué patrones descriptivos aparecen entre el consumo de videos cortos, las horas de estudio y las sesiones de concentración?</p></div></div></div></section>
+<section class="section dark" id="datos"><div class="section-kicker">02 / FUENTE Y EXPLORACIÓN</div><div class="section-heading"><h2>Conocer los datos<br>antes de analizarlos.</h2><p>La exploración inicial permitió reconocer la estructura de las tablas, sus variables y aspectos básicos de calidad.</p></div><div class="stats-grid"><article class="stat"><strong>5.000</strong><span>registros de actividad</span></article><article class="stat"><strong>5</strong><span>tablas del modelo de datos</span></article><article class="stat"><strong>14</strong><span>variables en Fact_User_Activity</span></article><article class="stat"><strong>0</strong><span>duplicados en la tabla de actividad</span></article></div><div class="data-model"><div class="fact-table"><span class="tag">TABLA DE HECHOS</span><h3>Fact_User_Activity</h3><p>Registros de actividad y medidas: horas de estudio, reels vistos, sesiones de concentración y otros indicadores.</p><span class="key">StateKey · HabitKey · UserKey · DateKey</span></div><div class="connector"><span>claves</span><i></i></div><div class="dimensions"><div><b>Dim_MentalState</b><small>Estado mental / Brainrot Stage</small></div><div><b>Dim_Users</b><small>Características de usuarios</small></div><div><b>Dim_Habits</b><small>Hábitos</small></div><div><b>Dim_Date</b><small>Calendario</small></div></div></div><div class="quality-note"><span class="dot"></span><div><b>Control de calidad registrado</b><p>En la exploración de las cinco tablas no se detectaron filas duplicadas. Se identificó un valor nulo en <code>Dim_Habits.Coffee_Level</code>, que no interviene en el análisis principal.</p></div></div><p class="footnote">La dimensión calendario contiene fechas de 2026; esto no implica que todos esos días tengan actividad observada. La cobertura efectiva se determina con las fechas de Fact_User_Activity.</p></section>
+<section class="section tables-section" id="tablas"><div class="section-kicker">03 / ESTRUCTURA DE LAS TABLAS</div><div class="section-heading"><h2>Dos tablas centrales<br>del análisis.</h2><p>Las capturas permiten reconocer los atributos originales y distinguir las medidas de actividad de las categorías que contextualizan los registros.</p></div>
+<article class="table-detail"><div class="table-description"><span class="chart-index">TABLA DE HECHOS</span><h3>Fact_User_Activity</h3><p>Concentra los registros de actividad. Sus claves vinculan cada observación con las dimensiones de usuario, fecha, estado mental y hábitos.</p><ul class="attribute-list"><li><b>ActivityID</b><span>Identificador del registro de actividad.</span></li><li><b>UserKey · DateKey</b><span>Referencias al usuario y a la fecha.</span></li><li><b>StateKey · HabitKey</b><span>Claves para enlazar estado mental y hábitos.</span></li><li><b>Study_Hours</b><span>Horas diarias de estudio registradas.</span></li><li><b>Focus_Sessions_Count</b><span>Cantidad de sesiones de concentración.</span></li><li><b>Total_Reels_Watched</b><span>Videos cortos vistos; variable usada para categorizar consumo.</span></li><li><b>Otras medidas</b><span>Incluye indicadores de actividad, exposición y bienestar disponibles en la tabla.</span></li></ul></div><figure class="table-image"><img src="assets/Fact_User_Activity.png" alt="Vista de las primeras filas de Fact User Activity"><figcaption>Vista de registros y atributos de la tabla de actividad.</figcaption></figure></article>
+<article class="table-detail reverse"><div class="table-description"><span class="chart-index">DIMENSIÓN</span><h3>Dim_MentalState</h3><p>Tabla categórica que aporta información sobre el estado mental asociado a cada registro mediante <code>StateKey</code>.</p><ul class="attribute-list"><li><b>StateKey</b><span>Clave de identificación y vinculación.</span></li><li><b>Brainrot_Stage</b><span>Categoría/etapa de estado mental utilizada para agrupar el boxplot.</span></li><li><b>Otros atributos</b><span>Se muestran en la captura; su interpretación depende de las definiciones documentadas en el dataset.</span></li></ul><p class="caution">Las categorías se utilizan tal como aparecen en los datos; no se les atribuye una interpretación clínica ni una validación externa.</p></div><figure class="table-image"><img src="assets/Dim_MentalState.png" alt="Vista de las primeras filas de Dim MentalState"><figcaption>Vista de categorías y atributos de la dimensión mental.</figcaption></figure></article><div class="table-note"><b>¿Por qué se relacionan?</b><p><code>StateKey</code> permite incorporar <code>Brainrot_Stage</code> a los registros de actividad. Así se compara la distribución de <code>Study_Hours</code> entre las categorías de la dimensión.</p></div></section>
+<section class="section" id="metodo"><div class="section-kicker">04 / PROCEDIMIENTO</div><div class="section-heading"><h2>Un flujo de trabajo<br>en tres operaciones.</h2><p>La secuencia transforma tablas relacionadas en una estructura que permite comparar grupos y estudiar patrones.</p></div><div class="steps"><article class="step"><span class="step-number">01</span><div class="step-code">pd.merge()</div><h3>Integración</h3><p>Se une la tabla de actividad con la dimensión de estado mental mediante <code>StateKey</code>, incorporando <code>Brainrot_Stage</code> a cada registro.</p><div class="step-foot">Hechos + dimensión mental → df_completo</div></article><article class="step"><span class="step-number">02</span><div class="step-code">pd.qcut()</div><h3>Categorización</h3><p>La variable <code>Total_Reels_Watched</code> se divide en tres grupos por cuantiles: Bajo, Medio y Alto.</p><div class="step-foot">Variable numérica → categoría ordinal</div></article><article class="step"><span class="step-number">03</span><div class="step-code">groupby() · mean()</div><h3>Resumen</h3><p>Se agrupa por nivel de consumo y se calculan promedios de <code>Study_Hours</code> y <code>Focus_Sessions_Count</code>.</p><div class="step-foot">Grupos → estadísticas descriptivas</div></article></div><div class="code-panel"><div class="code-header"><span>Fragmento del procedimiento</span><span>PYTHON / PANDAS</span></div><pre><code>df_completo = pd.merge(
     dfs['Actividad (Hechos)'],
     dfs['Estado Mental (Dimensión)'],
     on='StateKey', how='inner'
@@ -89,38 +21,7 @@ df_completo['Nivel_Consumo_Videos'] = pd.qcut(
 
 resumen_estadistico = df_completo.groupby(
     'Nivel_Consumo_Videos', observed=False
-)[['Study_Hours', 'Focus_Sessions_Count']].mean()</code></pre></div>
-</section>
-
-<section class="section results dark" id="resultados">
-  <div class="section-kicker">04 / LECTURA DE RESULTADOS</div>
-  <div class="section-heading"><h2>Tres perspectivas<br>sobre los registros.</h2><p>Las visualizaciones complementan la exposición oral: aquí se presentan con una lectura metodológica y sus cautelas.</p></div>
-  <article class="chart-block">
-    <div class="chart-copy"><span class="chart-index">FIGURA 01</span><h3>Distribución de horas de estudio</h3><p>El boxplot compara las horas de estudio diarias entre categorías de <em>Brainrot Stage</em>. Healthy presenta una mediana más alta; Critical y Advanced muestran medianas menores. Las cajas y los bigotes describen dispersión y rango, no un límite de capacidad cognitiva.</p><div class="chart-tags"><span>Boxplot</span><span>Study_Hours</span><span>Brainrot_Stage</span></div></div>
-    <figure><img src="assets/grafico1_distribucion.png" alt="Boxplot de horas de estudio por Brainrot Stage"><figcaption>Figura 1 · Distribución por categoría de estado mental.</figcaption></figure>
-  </article>
-  <article class="chart-block reverse">
-    <div class="chart-copy"><span class="chart-index">FIGURA 02</span><h3>Sesiones de concentración por consumo</h3><p>Los promedios descienden entre los grupos Bajo, Medio y Alto. En los registros analizados, el promedio es de 6,07; 3,95 y 1,06 sesiones, respectivamente. Se trata de una comparación descriptiva de grupos construidos con qcut.</p><div class="chart-tags"><span>mean()</span><span>groupby()</span></div></div>
-    <figure><img src="assets/grafico2_barras.png" alt="Promedio de sesiones de concentración por nivel de consumo"><figcaption>Figura 2 · Promedio de Focus_Sessions_Count por nivel.</figcaption></figure>
-  </article>
-  <article class="chart-block">
-    <div class="chart-copy"><span class="chart-index">FIGURA 03</span><h3>Videos vistos y horas de estudio</h3><p>La nube de puntos presenta una tendencia general negativa: a mayores cantidades de videos vistos aparecen, en términos generales, valores menores de horas de estudio. La dispersión también evidencia variabilidad entre registros.</p><div class="chart-tags"><span>Dispersión</span><span>Total_Reels_Watched</span><span>Study_Hours</span></div></div>
-    <figure><img src="assets/grafico3_dispersion.png" alt="Dispersión entre cantidad de reels vistos y horas de estudio"><figcaption>Figura 3 · Cada punto representa un registro.</figcaption></figure>
-  </article>
-</section>
-
-<section class="section synthesis" id="alcances">
-  <div class="section-kicker">05 / INTERPRETACIÓN Y ALCANCES</div>
-  <div class="section-heading"><h2>Qué permiten afirmar<br><em>los datos.</em></h2><p>El valor del análisis está tanto en los patrones observados como en delimitar aquello que no puede concluirse.</p></div>
-  <div class="conclusion-grid">
-    <article class="conclusion"><span class="symbol">↘</span><h3>Patrón descriptivo</h3><p>Los grupos de mayor consumo presentan promedios menores de sesiones de concentración y horas de estudio en las comparaciones realizadas.</p></article>
-    <article class="conclusion"><span class="symbol">≠</span><h3>No es causalidad</h3><p>Las asociaciones no prueban que consumir videos provoque una disminución de estudio o concentración. No se estableció dirección causal.</p></article>
-    <article class="conclusion"><span class="symbol">!</span><h3>Límites de medición</h3><p>Horas de estudio no equivalen a rendimiento académico. Los indicadores y categorías se interpretan según las variables disponibles, sin validación clínica.</p></article>
-  </div>
-  <div class="final-statement"><span>CIERRE</span><p>El análisis exploratorio permite identificar regularidades y formular preguntas mejor delimitadas. La evidencia observada describe asociaciones en este dataset; no reemplaza un diseño que permita explicar sus causas.</p></div>
-</section>
-</main>
-<footer><div class="footer-brand">TP LABO <span>· 2026</span></div><p>Laboratorio de Métodos Cuantitativos Aplicados a la Gestión</p><p>Esther Kikushima · Martín Pina</p><a href="#inicio">Volver al inicio ↑</a></footer>
-<script src="script.js"></script>
-</body>
-</html>
+)[['Study_Hours', 'Focus_Sessions_Count']].mean()</code></pre></div></section>
+<section class="section results dark" id="resultados"><div class="section-kicker">05 / LECTURA DE RESULTADOS</div><div class="section-heading"><h2>Tres perspectivas<br>sobre los registros.</h2><p>Las visualizaciones complementan la exposición oral: aquí se presentan con una lectura metodológica y sus cautelas.</p></div><article class="chart-block"><div class="chart-copy"><span class="chart-index">FIGURA 01</span><h3>Distribución de horas de estudio</h3><p>El boxplot compara las horas de estudio diarias entre categorías de <em>Brainrot Stage</em>. Healthy presenta una mediana más alta; Critical y Advanced muestran medianas menores. Las cajas y los bigotes describen dispersión y rango, no un límite de capacidad cognitiva.</p><div class="chart-tags"><span>Boxplot</span><span>Study_Hours</span><span>Brainrot_Stage</span></div></div><figure><img src="assets/grafico1_distribucion.png" alt="Boxplot de horas de estudio por Brainrot Stage"><figcaption>Figura 1 · Distribución por categoría de estado mental.</figcaption></figure></article><article class="chart-block reverse"><div class="chart-copy"><span class="chart-index">FIGURA 02</span><h3>Sesiones de concentración por consumo</h3><p>Los promedios descienden entre los grupos Bajo, Medio y Alto. En los registros analizados, el promedio es de 6,07; 3,95 y 1,06 sesiones, respectivamente.</p><div class="chart-tags"><span>Barras</span><span>mean()</span><span>groupby()</span></div></div><figure><img src="assets/grafico2_barras.png" alt="Promedio de sesiones de concentración por nivel de consumo"><figcaption>Figura 2 · Promedio de Focus_Sessions_Count por nivel.</figcaption></figure></article><article class="chart-block"><div class="chart-copy"><span class="chart-index">FIGURA 03</span><h3>Videos vistos y horas de estudio</h3><p>La nube de puntos presenta una tendencia general negativa: a mayores cantidades de videos vistos aparecen, en términos generales, valores menores de horas de estudio. La dispersión también evidencia variabilidad entre registros.</p><div class="chart-tags"><span>Dispersión</span><span>Total_Reels_Watched</span><span>Study_Hours</span></div></div><figure><img src="assets/grafico3_dispersion.png" alt="Dispersión entre cantidad de reels vistos y horas de estudio"><figcaption>Figura 3 · Cada punto representa un registro.</figcaption></figure></article></section>
+<section class="section synthesis" id="alcances"><div class="section-kicker">06 / INTERPRETACIÓN Y ALCANCES</div><div class="section-heading"><h2>Qué permiten afirmar<br><em>los datos.</em></h2><p>El valor del análisis está tanto en los patrones observados como en delimitar aquello que no puede concluirse.</p></div><div class="conclusion-grid"><article class="conclusion"><span class="symbol">↘</span><h3>Patrón descriptivo</h3><p>Los grupos de mayor consumo presentan promedios menores de sesiones de concentración y horas de estudio en las comparaciones realizadas.</p></article><article class="conclusion"><span class="symbol">≠</span><h3>No es causalidad</h3><p>Las asociaciones no prueban que consumir videos provoque una disminución de estudio o concentración.</p></article><article class="conclusion"><span class="symbol">!</span><h3>Límites de medición</h3><p>Horas de estudio no equivalen a rendimiento académico. Los indicadores y categorías se interpretan según las variables disponibles, sin validación clínica.</p></article></div><div class="final-statement"><span>CIERRE</span><p>El análisis exploratorio permite identificar regularidades y formular preguntas mejor delimitadas. La evidencia observada describe asociaciones en este dataset; no reemplaza un diseño que permita explicar sus causas.</p></div></section></main>
+<footer><div class="footer-brand">TP LABO <span>· 2026</span></div><p>Laboratorio de Métodos Cuantitativos Aplicados a la Gestión</p><p>Esther Kikushima · Martín Pina</p><a href="#inicio">Volver al inicio ↑</a></footer><script src="script.js"></script></body></html>
